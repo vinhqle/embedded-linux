@@ -1,10 +1,10 @@
 # embedded-linux
 ## linux-driver-programming branch
 ### How to run these project in branch?
-    + Run command ```make all``` to compile driver. After finishing this step, there are many files will be created in the directory, a file with ".ko" extension will be driver.
-    + Run command ```sudo insmod <filename>.ko``` to load module driver to system.
-    + Run command ```sudo rmmod <filename>``` to unload module driver from system.
-    + Run command ```make clean``` to clean up compiled files in the directory.
+- Run command ```make all``` to compile driver. After finishing this step, there are many files will be created in the directory, a file with ".ko" extension will be driver.
+- Run command ```sudo insmod <filename>.ko``` to load module driver to system.
+- Run command ```sudo rmmod <filename>``` to unload module driver from system.
+- Run command ```make clean``` to clean up compiled files in the directory.
 
 ### 1/ ex01_simple_module
 - This excercise will show how to programming a simple module driver.
