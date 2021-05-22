@@ -16,7 +16,11 @@
     + Raspberry Pi 4 board.
     + An LED
 - Connection:
-    + LED (+) will be connected to GPIO23 (Pin 16) of the Raspberry Pi 4 and another pin of LED will be connected to GND pin in Raspberry Pi 4.
+    + LED (+) will be connected to GPIO23 (Pin 16) of the Raspberry Pi 4 and another pin of LED will be connected to GND pin of the Raspberry Pi 4.
 - BCM2711 micro processor information:
-    + GPIO base address: 0x7e200000
-    + GPIO pin 23 offset: 0x08 (GPFSEL2)
+    + GPIO base address (virtual): 0xfe200000
+- How to run this excercise:
+    + Run command ```make all``` to compile driver. After finishing this step, there are many files will be created in the directory, a file with ".ko" extension will be driver.
+    + Run command ```sudo insmod <filename>.ko``` to load module driver to system.
+    + Run command ```sudo rmmod <filename>``` to unload module driver from system.
+    + Run command ```make clean``` to clean up compiled files in the directory.
