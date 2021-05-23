@@ -27,3 +27,13 @@
 - How to control LED:
     + Run command ```echo 1 > /dev/ex03_file_operation_device``` to enable LED.
     + Run command ```echo 0 > /dev/ex03_file_operation_device``` to disable LED.
+
+### 4/ ex04_driver_application_interact
+- This excercise will show how user can interact with driver and control state of LED through user application
+- In this excercise, we created 2 folder (Application & Driver) used for driver compiling and application compiling.
+- We re-use source code of ex03_led_control_module to continue with this excercise.
+- How to build application source code:
+    + Run command ```gcc application.c -o application``` to compile application source code.
+- How to run project (2 steps):
+    + Load driver into system.
+    + Move to application directory, run command ```./application```.
