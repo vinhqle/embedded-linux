@@ -28,6 +28,7 @@ typedef struct st_Led_Ctrl_Req {
     st_Body_Led_Ctrl_Req msg;
 }st_Led_Ctrl_Req;
 
+unsigned int ledState = 0;
 int main (void){
     
     while(1){
@@ -42,33 +43,11 @@ int main (void){
         lcReq.header.dwTotalMsgLen = sizeof(st_Led_Ctrl_Req);
         lcReq.msg.uiFuncID = 0;
         lcReq.msg.uiSeqNo = 0;
-        lcReq.msg.uiLedState = 0;
+        ledState = ledState == 0 ? 1 : 0;
+        lcReq.msg.uiLedState = ledState;
         lcReq.msg.uiPwm = 0;
 
         char* byteSnd = (char*)&lcReq;
-        if (write(fd, byteSnd, sizeof(st_Led_Ctrl_Req)) != sizeof(st_Led_Ctrl_Req)) {
-            perror("Error writing to /dev/ex04_file_operation_device");
-            close(fd);
-            exit(1);
-        }
-        close(fd);
-
-        sleep(1);
-
-        fd = open("/dev/ex04_file_operation_device", O_WRONLY);
-        if (fd == -1) {
-            perror("Unable to open /dev/ex04_file_operation_device");
-            exit(1);
-        }
-
-        lcReq.header.dwMessageID = OPT_LED_CTRL_REQ;
-        lcReq.header.dwTotalMsgLen = sizeof(st_Led_Ctrl_Req);
-        lcReq.msg.uiFuncID = 0;
-        lcReq.msg.uiSeqNo = 0;
-        lcReq.msg.uiLedState = 1;
-        lcReq.msg.uiPwm = 0;
-
-        byteSnd = (char*)&lcReq;
         if (write(fd, byteSnd, sizeof(st_Led_Ctrl_Req)) != sizeof(st_Led_Ctrl_Req)) {
             perror("Error writing to /dev/ex04_file_operation_device");
             close(fd);
