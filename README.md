@@ -20,3 +20,10 @@
     + LED (+) will be connected to GPIO23 (Pin 16) of the Raspberry Pi 4 and another pin of LED will be connected to GND pin of the Raspberry Pi 4.
 - BCM2711 micro processor information:
     + GPIO base address (virtual): 0xfe200000
+
+### 3/ ex03_file_operation_module
+- This excercise will show how user can interact with driver and control state of LED
+- We re-use source code of ex02_led_control_module to continue with this excercise.
+- How to control LED:
+    + Run command ```echo 1 > /dev/ex03_file_operation_device``` to enable LED.
+    + Run command ```echo 0 > /dev/ex03_file_operation_device``` to disable LED.
