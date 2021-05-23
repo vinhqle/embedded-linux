@@ -53,22 +53,22 @@ static int device_init(void){
 	int ret;
 	struct device *dev_ret;
 
-    // Mapping register
-    GPFSEL2_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_FUNC_SEL2, sizeof(__u32));
-    if(NULL == GPFSEL2_ADDR){
-        printk(KERN_ERR "Mapping set function failure!\n");
-        return -EBUSY;
-    }
-    GPSET0_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_PIN_OUT_SET, sizeof(__u32));
-    if(NULL == GPSET0_ADDR){
-        printk(KERN_ERR "Mapping set level failure!\n");
-        return -EBUSY;
-    }
-    GPCLR0_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_PIN_OUT_CLR, sizeof(__u32));
-    if(NULL == GPCLR0_ADDR){
-        printk(KERN_ERR "Mapping clear level failure!\n");
-        return -EBUSY;
-    }
+	// Mapping register
+	GPFSEL2_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_FUNC_SEL2, sizeof(__u32));
+	if(NULL == GPFSEL2_ADDR){
+		printk(KERN_ERR "Mapping set function failure!\n");
+		return -EBUSY;
+	}
+	GPSET0_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_PIN_OUT_SET, sizeof(__u32));
+	if(NULL == GPSET0_ADDR){
+		printk(KERN_ERR "Mapping set level failure!\n");
+		return -EBUSY;
+	}
+	GPCLR0_ADDR = (unsigned int*)ioremap(GPIO_ADDR_BASE + GPIO_PIN_OUT_CLR, sizeof(__u32));
+	if(NULL == GPCLR0_ADDR){
+		printk(KERN_ERR "Mapping clear level failure!\n");
+		return -EBUSY;
+	}
 
 	// Register major number for device
 	if ((ret = alloc_chrdev_region(&first, 0, 1, "ex03_file_operation_number")) < 0)
@@ -97,24 +97,24 @@ static int device_init(void){
 		return ret;
 	}
 
-    // Read GPFSEL2 register value
-    u32 fsel2Read;
-    fsel2Read = ioread32(GPFSEL2_ADDR);
-    // Set GPIO 23 to OUTPUT
-    iowrite32((fsel2Read & ~FSEL_23_MASK) | (GPIO_23_FUNC & FSEL_23_MASK), GPFSEL2_ADDR);
+	// Read GPFSEL2 register value
+	u32 fsel2Read;
+	fsel2Read = ioread32(GPFSEL2_ADDR);
+	// Set GPIO 23 to OUTPUT
+	iowrite32((fsel2Read & ~FSEL_23_MASK) | (GPIO_23_FUNC & FSEL_23_MASK), GPFSEL2_ADDR);
 
-    printk(KERN_ALERT "LED control driver module is loaded.");
-    return 0;
+	printk(KERN_ALERT "LED control driver module is loaded.");
+	return 0;
 }
 
 static void device_exit(void){
-    // Clear GPIO 23 level output
-    iowrite32(GPIO_23_INDEX, GPCLR0_ADDR);
+	// Clear GPIO 23 level output
+	iowrite32(GPIO_23_INDEX, GPCLR0_ADDR);
 
-    // Unmap register
-    iounmap(GPFSEL2_ADDR);
-    iounmap(GPSET0_ADDR);
-    iounmap(GPCLR0_ADDR);
+	// Unmap register
+	iounmap(GPFSEL2_ADDR);
+	iounmap(GPSET0_ADDR);
+	iounmap(GPCLR0_ADDR);
 
 	// Clear device instance
 	cdev_del(&c_dev);
@@ -122,8 +122,8 @@ static void device_exit(void){
 	class_destroy(cl);
 	unregister_chrdev_region(first, 1);
 
-    printk(KERN_ALERT "LED control driver module is unloaded.");
-    return;
+	printk(KERN_ALERT "LED control driver module is unloaded.");
+	return;
 }
 
 static int device_open(struct inode *i, struct file *f)
