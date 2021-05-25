@@ -37,3 +37,7 @@
 - How to run project (2 steps):
     + Load driver into system.
     + Move to application directory, run command ```./application```.
+
+### 5.ex05_driver_timer
+- This excercise will show how to implement a timer inside a driver.
+- We will re-use excercise 4 then update more source code for timer.
